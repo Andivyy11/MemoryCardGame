@@ -3,58 +3,47 @@ body{
     font-family: cursive;
     user-select: none;
 }
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+.card-faces{
+    position:absolute;
+    display:flex;
+    flex-wrap:wrap ;
+    justify-content:center;
+    align-content: center;
+    border-radius: 15px;
+    height:100%;
+    width:100%;
+    backface-visibility: hidden;
+    transition: 1s;
+}
 .cardBack{
-   position:absolute;
    z-index:3;
-   height:100%;
-   width:100%;
-   display:flex;
-   flex-wrap:wrap ;
-   justify-content:center;
-   align-content: center;
    background-color: white;
-  
-   border-radius: 15px;
    transform:rotateY(180deg);
-   backface-visibility: hidden;
-   transition: 1s;
    border:2px solid black;
 }
 .cardFront{
-    position: absolute;
     z-index: 2;
-    height:100%;
-    width:100%;
-    display:flex;
-   flex-wrap:wrap ;
-   justify-content:center;
-   align-content: center;
-    
     background-color: #d3a977;
-    border-radius: 15px;
-    backface-visibility: hidden;
-    transition: 1s;
-    
 }
 .card
 {
    position: relative;
    display:inline-block;
-   /* width:130px;
-   height:130px; */
    margin: 10px;
-   border-radius: 15px;
+   --isRotated:no;
 }
 .board{
-    /* width:610px;
-    height:610px; */
-    border-radius: 20px;
+    border-radius: 15px;
     background-color: rgb(255, 255, 255);
     position: absolute;
     top:50%;
     left:50%;
-    transform: translate(-50%,-50%);
-    
+    transform: translate(-50%,-50%);  
 }
 #mssg{
     position:absolute;
@@ -87,7 +76,4 @@ body{
     text-align: center;
     background-color:white;
 
-}
-.cnt div:hover{
-    background-color: #d3a977;
 }
