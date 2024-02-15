@@ -1,3 +1,4 @@
+
 var bd=document.querySelector('.board');
 var allCards;
 var msg=document.getElementById('mssg');
@@ -61,9 +62,9 @@ function createBoard()
            var crd=document.createElement('div');
            crd.classList.add('card');
            var cb=document.createElement('div');
-           cb.classList.add('cardBack');
+           cb.classList.add('cardBack' , 'card-faces');
            var cf=document.createElement('div');
-           cf.classList.add('cardFront');
+           cf.classList.add('cardFront', 'card-faces');
            cb.innerHTML=myItems[k];
            cf.innerHTML="?";
            crd.appendChild(cf);
@@ -87,14 +88,18 @@ function createBoard()
 }
 function rotateCard(car)
 {
-    moves+=1;
-    t+=1;
     var cb=car.querySelector('.cardBack');
     var cf=car.querySelector('.cardFront');
-    cb.style.transform="rotateY(0deg)";
-    cf.style.transform="rotateY(180deg)";
-    // console.log("clicked");
-    checkWin(car);
+    var rotated=window.getComputedStyle(car).getPropertyValue('--isRotated');
+    if(rotated==="no")
+    {
+        moves+=1;
+        t+=1;
+        cb.style.transform="rotateY(0deg)";
+        cf.style.transform="rotateY(180deg)";
+        car.style.setProperty('--isRotated', 'yes');
+        checkWin(car);
+    }
 }
 var flip;
 var t=0;
@@ -108,7 +113,7 @@ function checkWin(car)
         var flipf=flip.querySelector('.cardFront');
         var cf=car.querySelector('.cardFront');
         
-        if(flip!=car && flipb.innerHTML==cb.innerHTML)
+        if(flipb.innerHTML==cb.innerHTML)
         { 
           count+=2;
           flip.style.visibility="hidden";
@@ -123,8 +128,11 @@ function checkWin(car)
             {
              cb.style.transform="rotateY(180deg)";
              cf.style.transform="rotateY(0deg)"; 
+             car.style.setProperty('--isRotated','no');
              flipb.style.transform="rotateY(180deg)";
              flipf.style.transform="rotateY(0deg)"; 
+             car.style.setProperty('--isRotated', 'no');
+
             }
         }
     }
@@ -186,4 +194,4 @@ function getlvl(l)
 
 setInterval(function (){
     time+=1;
-},1000);
+})
